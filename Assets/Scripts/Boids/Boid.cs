@@ -11,8 +11,8 @@ public class Boid : MonoBehaviour
     public void SteerTowards(Vector3 target, float modifier = 1f)
     {
         Vector3 dir = Vector3.Normalize(target - transform.position);
-        Quaternion lookRot = Quaternion.LookRotation(dir);
 
+        Quaternion lookRot = Quaternion.LookRotation(dir);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, SteerSpeed * modifier * Time.deltaTime);
     }
 
