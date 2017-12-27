@@ -70,10 +70,13 @@ public class BoidController : ScriptableObject
             {
                 Boid n = b.Neighbors[j];
                 Vector3 toNeighbor = n.transform.position - b.transform.position;
+                float dist = toNeighbor.magnitude;
 
-                if (toNeighbor.magnitude < SeparationRadius)
+                if (dist < SeparationRadius)
                 {
-                    avgDir += toNeighbor;
+                    float falloffFactor = 1f - dist / SeparationRadius;
+
+                    avgDir += toNeighbor * falloffFactor;
                     count++;
                 }
             }

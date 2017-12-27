@@ -8,13 +8,11 @@ public class Boid : MonoBehaviour
     public float SteerSpeed = 1f;
     [HideInInspector] public List<Boid> Neighbors = new List<Boid>();
 
-    private Quaternion lookRot;
-
     public void SteerTowards(Vector3 target, float modifier = 1f)
     {
         Vector3 dir = Vector3.Normalize(target - transform.position);
+        Quaternion lookRot = Quaternion.LookRotation(dir);
 
-        lookRot = Quaternion.LookRotation(dir);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, SteerSpeed * modifier * Time.deltaTime);
     }
 
